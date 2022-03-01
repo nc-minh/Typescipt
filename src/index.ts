@@ -95,4 +95,71 @@ const heart: iconButton = {
     icon: 'heart-icon'
 }
 
-console.log("hehe: ", heart.onClick())
+// console.log("hehe: ", heart.onClick())
+
+// Implement interface
+
+class MyContact implements Contact{
+    name: string;
+    phone: string;
+
+    constructor(name: string, phone: string){
+        this.name = name
+        this.phone = phone
+    }
+}
+
+const a = new MyContact('Minhdeptrai', '00000')
+
+// console.log(a)
+
+class ContactApp{
+    render(){
+        const contacts: Contact[] = [
+            { name: 'A', phone: '123' },
+            { name: 'B', phone: '456' }
+        ]
+
+        console.table(contacts)
+    }
+}
+
+const app = new ContactApp()
+
+app.render()
+
+// 
+interface ContactAdapter{
+    getData: () => Promise<Contact[]>
+}
+
+class ContactApp1{
+    adapter: ContactAdapter;
+    constructor(adapter: ContactAdapter){
+        this.adapter = adapter
+    }
+
+    async render(){
+        const contacts1: Contact[] = 
+        await this.adapter.getData()
+        console.table(contacts1)
+    }
+}
+
+class MyContactAdapter implements ContactAdapter{
+    async getData() {
+        const contacts1: Contact[] = [
+            { name: 'A', phone: '333' },
+            { name: 'B', phone: '999' },
+        ];
+
+        return contacts1
+    }
+}
+
+const adapter = new MyContactAdapter()
+const app1 = new ContactApp1(adapter)
+
+app.render()
+
+// Interface declaration merging
