@@ -23,8 +23,17 @@ console.log(typeof bigNum)
 
 // Interface
 
+enum PetType{
+    Dog,
+    Cat,
+    Bird,
+    Fish,
+    Reptile
+}
+
 interface Pet{
     name: string;
+    type: PetType
 }
 
 interface Contact{
@@ -41,7 +50,8 @@ const newContact: Contact = {
     phone: '4649846',
     email: 'ncm@gmail.com',
     pet: {
-        name: 'chi'
+        name: 'chi',
+        type: PetType.Dog
     }
 }
 
@@ -141,9 +151,9 @@ class ContactApp1{
 
     async render(){
         const contacts1: Contact[] = 
-        await this.adapter.getData()
+            await this.adapter.getData()
         console.table(contacts1)
-    }
+    }    
 }
 
 class MyContactAdapter implements ContactAdapter{
@@ -160,6 +170,39 @@ class MyContactAdapter implements ContactAdapter{
 const adapter = new MyContactAdapter()
 const app1 = new ContactApp1(adapter)
 
-app.render()
+app1.render()
 
 // Interface declaration merging
+// Có thể tạo ra 2 interface cùng tên và sẽ gộp các trường lại làm 1
+
+// types inference
+// Khi tạo một biến a được gán bằng một class hoặc một interface thì không cần khai báo kiểu của nó TS sẽ tự hiểu
+
+// Contextual typing
+
+// Duck typing (structural typing)
+// -> nếu mà không khai báo kiểu cho một object nhưng object đó có cấu trúc giống với interface đã 
+// định nghĩa(và có các fill mà nó require) thì vẫn có thể push vào một mảng yêu cầu interface kia
+
+// enum
+
+//union type
+// có thể không truyền hoặc chỉ có thể là một số data đã quy định sẵn
+function isWeekend(date: Date | string | number): boolean{
+    if(typeof date === 'string' || typeof date === 'number'){
+        date = new Date(date)
+    }
+
+    const day = date.getDay()
+    return day === 6 || day === 0
+}
+
+console.log(isWeekend(new Date()))
+console.log(isWeekend('2022-03-5'))
+
+// type alias
+type MixedDate = Date | string | number
+
+function isLastDayOfMonth(date: MixedDate): boolean{
+    return false
+}
