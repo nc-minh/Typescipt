@@ -1,0 +1,11 @@
+// Khi build và chạy file ts -> js đã được build thì sẽ có thông báo cần thêm type="module"
+// Vì trong file js được compile ra dùng import
+// Nếu muốn chạy ở server thì cần thêm option cho compilerOptions "module": "commonjs"
+{
+    "compilerOptions": {
+        "target": "es2020",
+        "outDir": "build",
+        "strictNullChecks": true //kiểm tra cho chặt chẽ hơn
+    },
+    "include": ["src/**/*"]
+}

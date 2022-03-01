@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "tsnd --respawn ./index.ts",
-    "build": "tsc ./index.ts --outDir ./build"
+    "dev": "tsnd --respawn ./src/index.ts",
+    "build": "tsc -p ."
   },
   "repository": {
     "type": "git",
