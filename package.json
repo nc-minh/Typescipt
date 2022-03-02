@@ -2,10 +2,11 @@
   "name": "typescipt",
   "version": "1.0.0",
   "description": "ncm, typescript, learing",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "tsnd --respawn ./src/index.ts",
+    "learning": "tsnd --respawn ./src/learn.ts",
     "build": "tsc -p ."
   },
   "repository": {

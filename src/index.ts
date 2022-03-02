@@ -201,6 +201,7 @@ console.log(isWeekend(new Date()))
 console.log(isWeekend('2022-03-5'))
 
 // type alias
+// Tạo kiểu dữ liệu mới trên những dữ liệu đã có
 type MixedDate = Date | string | number
 
 function isLastDayOfMonth(date: MixedDate): boolean{
