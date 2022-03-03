@@ -16,5 +16,58 @@ console.log(makeArr(['a', 3]))
 const makeArrXY = <X, Y>(x: X, y: Y) => [x, y]
 console.log(makeArrXY('oke', 3))
 
+// tạo tuple từ generics
 const makeTuple = <X, Y>(x: X, y: Y): [X, Y] => [x, y]
-makeTuple(4, 5)
+const cloneTuple = makeTuple(4, 5)
+const cloneTuple2 = makeTuple<string, number>('stringne', 10)
+
+// GENERICS EXTENDS
+const makeFullName = obj => ({
+    ...obj,
+    fullName: `${obj.firstName} ${obj.lastName}`
+})
+
+const makeFullNameConstraint = (obj: {firstName: string, lastName: string}) => ({
+    ...obj,
+    fullName: `${obj.firstName} ${obj.lastName}`
+})
+
+const makeFullNameConstraintGenerics = <T extends {firstName: string; lastName: string}>(obj: T) => ({
+    ...obj,
+    fullName: `${obj.firstName} ${obj.lastName}`
+})
+
+const addNewEmployee = (employee: object) => {
+    const uid = (Math.floor(Math.random() * 10000))
+
+    return{
+        ...employee,
+        uid
+    }
+}
+
+const employeeOne = addNewEmployee({
+    name: 'Ming',
+    age: 20,
+})
+
+console.log(employeeOne)
+// console.log(employeeOne.name) ->> không thể làm như này vì nó không biết trong employeeOne có name
+
+// Using generics
+const addNewEmployee_Generics = <T>(employee: T) => {
+    const uid = (Math.floor(Math.random() * 10000))
+
+    return{
+        ...employee,
+        uid
+    }
+}
+
+const employeeTwo = addNewEmployee_Generics({
+    name: 'MingGethigh',
+    age: 20
+})
+
+console.log(employeeTwo)
+console.log(employeeTwo.name)
